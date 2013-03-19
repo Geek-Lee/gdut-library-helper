@@ -1,0 +1,62 @@
+# GDUT library helper
+
+广工图书馆豆瓣读书助手 (全国[第三漂亮](http://daxue.163.com/11/1115/16/7ITQV90H00913JC5_all.html)的图书馆书还是挺多的哦！)
+
+
+## 功能
+
+### 条目页面查询馆藏量
+
+![条目页面显示](artworks/subject-query.png)
+
+### 搜索豆瓣读书的同时搜索广工图书馆
+
+![快捷搜索](artworks/search.png)
+
+
+### 自动填写推荐购买表单
+
+![广工大图书馆居然没有？！](artworks/not_found.png)
+
+![推荐之！](artworks/recommend.png)
+
+v0.2.1 加入
+
+
+## 安裝
+
+[脚本地址](http://raw.github.com/vtmer/gdut-library-helper/master/gdut_library_helper.js)
+
+### Chrome / Chromium
+
+#### 方案一：
+
+先安装 [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)，
+然后可以在 Options 里安装新脚本。
+
+
+#### 方案二：
+
+安装 [Chrome 插件](gdut_library_helper.crx)，因为暂时还未在 Chrome Web Store 上
+架，所以先手拖到 chrome://extensions 安装吧 :)
+
+
+### Firefox
+
+通过安装 Greasemonkey 来启用脚本。
+
+(等各位 firefox 用户的测试)
+
+
+## 新功能 / 大臭虫(Bug) / 吐槽 / 建议
+
+暂时先到 [issue](https://github.com/vtmer/gdut-library-helper/issues) 里面提吧！期待你的贡献与吐槽 =D
+
+
+## 开发者 
+
+[@linkkingjay](https://github.com/linkkingjay)
+
+[@hbc](http://www.douban.com/people/minihbc)
+
+维生数工作室

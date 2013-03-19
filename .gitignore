@@ -1,0 +1,9 @@
+*swp
+*~
+*pyc
+
+converter.py
+ext/
+*.pem
+
+venv/
