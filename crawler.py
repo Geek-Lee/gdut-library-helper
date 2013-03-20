@@ -1,5 +1,7 @@
 #coding: utf-8
 
+from os import path
+import json
 import requests
 from pyquery import PyQuery as pq
 
@@ -35,11 +37,15 @@ class Parser(object):
 
     @property
     def head(self):
+        if not self.table:
+            return None
         h = self.table('thead tr').eq(0)
         return self._parser_tr(h)[0:]
 
     @property
     def body(self):
+        if not self.table:
+            return None
         b = self.table('tbody tr').each(self._get_text)
         return [self._parser_tr(tr) for tr in b]
 
@@ -50,6 +56,10 @@ class Parser(object):
         self.table = table if table.html() else None
         return table
 
+    def save(self, filename):
+        with open(filename, 'w') as f:
+            f.write(json.dumps(dict(body=self.body, head=self.head)))
+
 
 class BooksParser(Parser):
     ranktype = 0
@@ -57,6 +67,9 @@ class BooksParser(Parser):
     @property
     def body(self):
         b, maps = super(BooksParser, self).body, {}
+
+        if not b:
+            return b
 
         b = map(lambda x: [int(x[1])] + x[1:], b)
         for row in b:
@@ -73,8 +86,28 @@ class StudentsParser(Parser):
     @property
     def body(self):
         b = super(StudentsParser, self).body
+        if not b:
+            return b
         return map(lambda x: x[1:-1] + [int(x[-1])], b)
 
 
 class FacultyParser(StudentsParser):
     ranktype = 2
+
+
+def main():
+    parsers = [BooksParser(), StudentsParser(), FacultyParser()]
+
+    for year in xrange(2007, 2014):
+        for month in xrange(1, 13):
+            for parser in parsers:
+                parser.query(year, month)
+                filename = path.join('data',
+                                     '%d-%d-%d.json' % (parser.ranktype,
+                                                        year, month))
+                print 'writing %s' % (filename)
+                parser.save(filename)
+
+
+if __name__ == '__main__':
+    main()
