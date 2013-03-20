@@ -40,7 +40,7 @@ class Parser(object):
         if not self.table:
             return None
         h = self.table('thead tr').eq(0)
-        return self._parser_tr(h)[0:]
+        return self._parser_tr(h)[1:]
 
     @property
     def body(self):
@@ -58,7 +58,7 @@ class Parser(object):
 
     def save(self, filename):
         with open(filename, 'w') as f:
-            f.write(json.dumps(dict(body=self.body, head=self.head)))
+            f.write(json.dumps(dict(body=self.body, head=self.head), indent=2))
 
 
 class BooksParser(Parser):
@@ -71,12 +71,12 @@ class BooksParser(Parser):
         if not b:
             return b
 
-        b = map(lambda x: [int(x[1])] + x[1:], b)
+        b = map(lambda x: [int(x[1])] + x[2:], b)
         for row in b:
-            if maps.get(row[3], None):
-                maps[row[3]][1] = maps[row[3]][1] + row[1]
+            if maps.get(row[2], None):
+                maps[row[2]][0] = maps[row[2]][0] + row[0]
             else:
-                maps[row[3]] = row
+                maps[row[2]] = row
         return maps.values()
 
 
