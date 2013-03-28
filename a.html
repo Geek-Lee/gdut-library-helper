@@ -1,0 +1,223 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head><title>
+	广东工业大学图书馆书目检索系统 
+</title><link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/prototype.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/autocomplete.js"></script>
+    <script type="text/javascript">
+        var _islog = false;
+        var _suburl = "";
+        var shurl = _suburl + "user/mysearchhistory.aspx";
+        function ilogin()
+        {
+            new internallogin(iloginsuccess,_suburl);
+        }
+        function islogin()
+        {
+            $('islogoutspan').hide();
+            $('isloginspan').show();
+            $('loginmsg').show();
+            _islog = true;
+            /*更新评分信息*/
+            if ($('pingfencontent') != null)
+                getscore();
+           /*更新检索历史提示登录信息*/
+           if ($('sh_login_hint') != null)
+                $('sh_login_hint').hide();
+            /*如果是bookinfo则显示预约信息*/
+            var url1 = window.location.pathname;
+            if (url1.indexOf("bookinfo.aspx") >=0 )
+            {
+                //检查系统预约参数
+                if(0 == 0)
+                {
+                    listbookwithresv();
+                }
+            }
+        }
+        function islogout()
+        {
+            $('islogoutspan').show();
+            $('isloginspan').hide();
+            $('loginmsg').hide();
+            _islog = false;
+        }
+        function iloginsuccess()
+        {
+            var wurl = window.location.href;
+            var rurlIndex;
+            if ((rurlIndex = wurl.indexOf("login.aspx?ReturnUrl=")) != -1)
+            {
+                var rurl = decodeURIComponent(wurl.substr(rurlIndex + 21));
+                if (isie())
+                    window.location.href = rurl;
+            }
+            islogin();
+//            if (getscore != undefined && getscore != null && typeof getscore == 'function')
+//                getscore();
+        }
+        function iloginforsh()
+        {
+            islogin();
+            gotosh();
+        }
+        function ilogout()
+        {
+            internallogout(null,_suburl);
+            _islog = false;
+        }
+        function ilogout_callback()
+        {
+            islogout();
+        }
+        function gotosh()
+        {
+           if (_islog == false)
+           {
+                new internallogin(iloginforsh,_suburl);
+           }
+           else
+           {
+                window.location.href = shurl;
+           } 
+        }
+    </script>
+</head>
+<body>
+    
+    <!-- 头部-->
+    <div id="header" class="clearFix">
+        <div id="headerlogo">
+            <img id="ctl00_headerimg" src="images/headeropac4gif.gif" border="0" />
+        </div>
+        <div id="headertext">
+            <span id="ctl00_sitenamelbl">广东工业大学图书馆书目检索系统</span>
+        </div>
+        <div id="headermenu" class="clearFix" style="width:45%">
+            <div class="fl" style="width:56%">
+                        <span id="loginmsg" style="display:none;">
+                <!--<marquee width="150px" align="middle" behavior="scroll" scrollamount="2"></marquee>-->
+                登录成功。 如果您使用的是公共电脑，请在使用完毕后，务必退出登录，切记！
+            </span>
+            </div>
+            <div class="fr" style="width:42%">
+            &nbsp;<span id="islogoutspan" style="display:none"><a href="javascript:void(0)" onclick="ilogin()" class="redlink">登录</a></span>
+            <span id="isloginspan" style="display:none">
+
+            <a href="javascript:void(0)" onclick="ilogout()" class="redlink">退出</a></span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+            <a href="javascript:gotosh()">我的检索历史</a>
+            <br />
+            今天是&nbsp;&nbsp;&nbsp;&nbsp;<span id="ctl00_nowlbl">2013年03月28日  星期四</span>
+            </div>
+        </div>
+        
+    </div>
+    <!--内容-->
+    <div id="content">
+        
+    
+<!--菜单 -->
+     <div id="pagemenu">
+         
+                <ul>
+            
+                <li>
+                    <a href='search.aspx' >目录检索</a>
+                </li>
+            
+                <li>
+                    <a href='peri_nav_class.aspx' >分类导航</a>
+                </li>
+            
+                <li>
+                    <a href='book_rank.aspx' class="select">读书指引</a>
+                </li>
+            
+                <li>
+                    <a href='xstb.aspx' >新书通报</a>
+                </li>
+            
+                <li>
+                    <a href='readerrecommend.aspx' >读者荐购</a>
+                </li>
+            
+                <li>
+                    <a href='overduebooks_f.aspx' >提醒服务</a>
+                </li>
+            
+                <li>
+                    <a href='user/userinfo.aspx' >我的图书馆</a>
+                </li>
+            
+                <li>
+                    <a href='http://library.gdut.edu.cn/' >图书馆首页</a>
+                </li>
+            
+                
+                </ul>
+              
+    </div>
+    <div id="pagesubmenu">
+        
+                <ul>
+            
+                <li>
+                    <a href="book_rank.aspx" class="select">热门借阅</a>
+                </li>
+            
+                <li>
+                    <a href="user_score_rank.aspx" >热门评价</a>
+                </li>
+            
+                <li>
+                    <a href="mc_rank.aspx" >热门收藏</a>
+                </li>
+            
+                <li>
+                    <a href="pro_rank.aspx" >馆员/学者的最新推荐</a>
+                </li>
+            
+                </ul>
+              
+    </div>
+
+    <div id="mcrankdiv">
+    <h1 class="hotpagetitle">热门借阅——</h1>
+    
+    <div class="hotpagecontent">
+        <div id="mcrankresultdiv">
+        <span class="fleft">
+        <a href="javascript:history.back()" >查询排行榜</a></span><br/><br/>
+        
+            
+        
+        
+         
+        
+        <div id="ctl00_ContentPlaceHolder1_divhtml"></div>
+        <br/>
+        </div>
+        </div>
+    </div>
+    <br/><br/>
+
+    </div>
+    <!--版权部分-->
+    <div id="footer">
+			<div class="clearFix footer">		
+				<div class="fl">
+					<img src="images/logo-sulcmis-opac.gif"/>
+				</div>
+				<div class="fl footertext">
+					<span id="ctl00_footertextlbl">Copyright &copy;2008-2009. SULCMIS OPAC 4.01 of Shenzhen University Library.  All rights reserved.<br />版权所有：深圳大学图书馆 E-mail:szulib@szu.edu.cn</span>
+				</div>
+			</div>
+    </div>
+</body>
+<script type="text/javascript">islogout()</script>
+</html>
