@@ -2,6 +2,7 @@
 
 from os import path
 import json
+
 import requests
 from pyquery import PyQuery as pq
 
@@ -22,6 +23,7 @@ class Parser(object):
             'maxcount': count,
             'd1': d(year, month),
             'd2': d(year, month),
+            'yearmon': '%d%02d' % (year, month),
             'cls': '',
             'queryfile': 1,
             'ranktypevalue': ranktype
@@ -49,7 +51,8 @@ class Parser(object):
         b = self.table('tbody tr').each(self._get_text)
         return [self._parser_tr(tr) for tr in b]
 
-    def query(self, year, month, count=maxcount):
+    def query(self, year, month, count=None):
+        count = count or self.maxcount
         ret = requests.get(self.url, params=self.params(count, year, month,
                                                         self.ranktype))
         table = pq(ret.text)('table.tb')
