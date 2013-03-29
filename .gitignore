@@ -1,6 +1,7 @@
 *swp
 *~
 *pyc
+.sass-cache/
 
 converter.py
 ext/

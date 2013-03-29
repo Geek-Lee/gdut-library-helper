@@ -1,0 +1,43 @@
+body {
+  background: #f2f1e8; }
+
+.container {
+  width: 100%;
+  height: 700px; }
+
+.book {
+  width: 300px;
+  height: 370px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 2px 10px 5px;
+  border: 1.5px solid #8dc63e;
+  position: absolute;
+  top: 120px;
+  left: 20px;
+  background: #fff;
+  box-shadow: 5px 5px 2px rgba(10, 10, 10, 0.15); }
+  .book:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-style: solid;
+    border-width: 40px 0 0 40px;
+    border-color: #8dc63e;
+    border-left-color: transparent; }
+  .book header, .book section {
+    margin: 0 10px; }
+  .book header {
+    border-bottom: 1.5px solid #222; }
+    .book header h1 {
+      margin: 10px auto 2px;
+      font-size: 35px;
+      line-height: 50px;
+      font-family: sans-serif; }
+  .book section p {
+    margin: 9px 0;
+    font-size: 18px;
+    line-height: 27px; }
