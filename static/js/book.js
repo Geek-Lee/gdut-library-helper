@@ -5,7 +5,7 @@ require.config({
         }
     },
     paths: {
-        underscore: 'libs/underscore/underscore',
+        underscore: 'libs/underscore',
         data_attributes: 'utils/da',
         draggable: 'utils/draggable'
     }
