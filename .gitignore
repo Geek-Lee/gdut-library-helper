@@ -3,6 +3,7 @@
 *pyc
 .sass-cache/
 node_modules/
+components/
 
 converter.py
 ext/
