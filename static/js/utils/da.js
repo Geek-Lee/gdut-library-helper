@@ -1,6 +1,9 @@
 define([], function() {
-    var default_values = {
-        left: 0, top: 0, zIndex: -1000
+    var r = function(base) { return Math.random() * base; },
+        default_values = {
+        left: r,
+        top: r,
+        zIndex: -1000
     }, assign;
 
     assign = function(item) {
@@ -33,10 +36,10 @@ define([], function() {
         }
 
         if (item.style.left === '') {
-            item.style.left = default_values.left;
+            item.style.left = default_values.left(800) + 'px';
         }
         if (item.style.top === '') {
-            item.style.top = default_values.top;
+            item.style.top = default_values.top(600) + 'px';
         }
     };
 

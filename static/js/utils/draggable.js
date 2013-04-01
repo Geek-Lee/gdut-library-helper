@@ -1,14 +1,4 @@
 define([], function() {
-    var draggable = document.getElementsByClassName('draggable'),
-        i, position, c;
-
-    for (i = 0;i < draggable.length;i++) {
-        c = draggable[i];
-        c.addEventListener('mousedown', startDrag(c), false);
-        c.addEventListener('mousemove', placeDrag(c), false);
-        c.addEventListener('mouseup', stopDrag(c), false);
-    }
-
     function startDrag(item) {
         return function(e) {
             if (!item.position) {
@@ -37,4 +27,12 @@ define([], function() {
             item.position = null;   
         };
     }
+
+    return function(c) {
+        c.addEventListener('mousedown', startDrag(c), false);
+        c.addEventListener('mousemove', placeDrag(c), false);
+        c.addEventListener('mouseup', stopDrag(c), false);
+
+        return c;
+    };
 });
