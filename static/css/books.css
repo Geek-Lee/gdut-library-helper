@@ -18,7 +18,12 @@ body {
   top: 120px;
   left: 20px;
   background: #fff;
-  box-shadow: 5px 5px 2px rgba(10, 10, 10, 0.15); }
+  box-shadow: 5px 5px 2px rgba(10, 10, 10, 0.15);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none; }
   .book:after {
     content: '';
     position: absolute;
